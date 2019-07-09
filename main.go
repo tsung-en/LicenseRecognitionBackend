@@ -1,10 +1,10 @@
 package main
 
 import (
+	"LicenseRecognitionBackend/router"
 	"fmt"
 	"os"
 
-	"github.com/gin-gonic/gin"
 	"gopkg.in/ini.v1"
 )
 
@@ -18,9 +18,11 @@ func main() {
 
 	port := cfg.Section("server").Key("port").MustInt(9999)
 
-	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
-		c.String(200, "Hello World")
-	})
-	r.Run(fmt.Sprintf(":%d", port))
+	router := router.InitRouter()
+	router.Run(fmt.Sprintf(":%d", port))
+
+	// r := gin.Default()
+	// r.GET("/", func(c *gin.Context) {
+	// })
+	// r.Run(fmt.Sprintf(":%d", port))
 }
