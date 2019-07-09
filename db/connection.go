@@ -3,6 +3,7 @@ package db
 import (
 	"fmt"
 
+	_ "github.com/go-sql-driver/mysql" //加载mysql
 	"github.com/jinzhu/gorm"
 	"gopkg.in/ini.v1"
 )
