@@ -3,6 +3,7 @@ package main
 import (
 	"LicenseRecognitionBackend/db"
 	"LicenseRecognitionBackend/router"
+	. "LicenseRecognitionBackend/model"
 	"fmt"
 	"os"
 
@@ -19,6 +20,7 @@ func main() {
 
 	port := cfg.Section("server").Key("port").MustInt(9999)
 
+	db.Eloquent.AutoMigrate(&User{}, &UserCar{}, &Parking{})
 	defer db.Eloquent.Close()
 
 	router := router.InitRouter()
