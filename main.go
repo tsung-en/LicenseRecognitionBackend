@@ -1,6 +1,7 @@
 package main
 
 import (
+	"LicenseRecognitionBackend/db"
 	"LicenseRecognitionBackend/router"
 	"fmt"
 	"os"
@@ -17,6 +18,8 @@ func main() {
 	}
 
 	port := cfg.Section("server").Key("port").MustInt(9999)
+
+	defer db.Eloquent.Close()
 
 	router := router.InitRouter()
 	router.Run(fmt.Sprintf(":%d", port))
