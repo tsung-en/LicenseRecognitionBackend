@@ -2,8 +2,8 @@ package main
 
 import (
 	"LicenseRecognitionBackend/db"
-	"LicenseRecognitionBackend/router"
 	. "LicenseRecognitionBackend/model"
+	"LicenseRecognitionBackend/router"
 	"fmt"
 	"os"
 
@@ -26,8 +26,4 @@ func main() {
 	router := router.InitRouter()
 	router.Run(fmt.Sprintf(":%d", port))
 
-	// r := gin.Default()
-	// r.GET("/", func(c *gin.Context) {
-	// })
-	// r.Run(fmt.Sprintf(":%d", port))
 }

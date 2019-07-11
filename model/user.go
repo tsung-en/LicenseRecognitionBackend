@@ -10,5 +10,6 @@ type User struct {
 	Username string
 	Password string
 	Email    string
+	Token    string
 	Cars     []UserCar `gorm:"foreignkey:UserID"`
 }
