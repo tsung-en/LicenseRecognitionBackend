@@ -11,5 +11,9 @@ func InitRouter() *gin.Engine {
 
 	router.GET("/", Hello)
 
+	parkingGroup := router.Group("/parking")
+
+	parkingGroup.GET("/:car/info", ParkingInfo)
+
 	return router
 }

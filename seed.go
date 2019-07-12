@@ -8,6 +8,9 @@ import (
 )
 
 func main() {
+	db.Eloquent.DropTableIfExists(&models.User{}, &models.UserCar{}, &models.Parking{})
+	db.Eloquent.AutoMigrate(&models.User{}, &models.UserCar{}, &models.Parking{})
+	
 	car1 := models.UserCar{
 		Car: "1111-AB",
 	}
