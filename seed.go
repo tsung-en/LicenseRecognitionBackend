@@ -51,8 +51,28 @@ func main() {
 		CheckIn:  checkin,
 		CheckOut: chekout,
 	}
+
+	checkin, err = time.Parse(
+		time.RFC3339,
+		"2019-07-03T09:00:00+08:00",
+	)
+	if err != nil {
+		fmt.Printf("%v", err)
+	}
+	chekout, err = time.Parse(
+		time.RFC3339,
+		"2019-07-04T13:00:00+08:00",
+	)
+	parking2 := models.Parking{
+		Car:      "3333-ED",
+		CheckIn:  checkin,
+		CheckOut: chekout,
+	}
+
 	db.Eloquent.Create(&user1)
 	db.Eloquent.Create(&user2)
 
 	db.Eloquent.Create(&parking1)
+	db.Eloquent.Create(&parking2)
+	fmt.Print("Finished Seeding Database")
 }
