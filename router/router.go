@@ -13,6 +13,7 @@ func InitRouter() *gin.Engine {
 
 	parkingGroup := router.Group("/parking")
 
+	parkingGroup.POST("/checkin", ParkingCheckIn)
 	parkingGroup.GET("/:car/info", ParkingInfo)
 
 	return router
