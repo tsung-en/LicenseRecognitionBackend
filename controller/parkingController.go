@@ -8,15 +8,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type CheckInType struct {
-	Car  string    `json:"car"  binding:"required"`
-	Time time.Time `json:"time" binding:"required"`
+type CarType struct {
+	Car string `json:"car"  binding:"required"`
 }
 
 func ParkingCheckIn(c *gin.Context) {
 	// c.JSON(200, c)
-	var checkInType CheckInType
-	err := c.ShouldBindJSON(&checkInType)
+	var CarType CarType
+	err := c.ShouldBindJSON(&CarType)
 	if err != nil {
 		c.JSON(200, gin.H{
 			"code":    -1,
@@ -26,8 +25,8 @@ func ParkingCheckIn(c *gin.Context) {
 	}
 
 	var parking models.Parking
-	parking.Car = checkInType.Car
-	parking.CheckIn = checkInType.Time
+	parking.Car = CarType.Car
+	parking.CheckIn = time.Now()
 	err = parking.Insert()
 	if err != nil {
 		c.JSON(200, gin.H{
@@ -37,7 +36,7 @@ func ParkingCheckIn(c *gin.Context) {
 		return
 	}
 	c.JSON(200, gin.H{
-		"checkintype": &checkInType,
+		"checkintype": &parking,
 	})
 	return
 }
