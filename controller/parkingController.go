@@ -36,7 +36,7 @@ func ParkingCheckIn(c *gin.Context) {
 		return
 	}
 	c.JSON(200, gin.H{
-		"checkintype": &parking,
+		"result": &parking,
 	})
 	return
 }
