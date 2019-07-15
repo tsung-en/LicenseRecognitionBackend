@@ -65,7 +65,8 @@ func ParkingCheckOut(c *gin.Context) {
 
 	var parking models.Parking
 	parking.Car = CarType.Car
-	parking.CheckOut = time.Now()
+	now := time.Now()
+	parking.CheckOut = &now
 
 	if err = parking.Update(); err != nil {
 		c.JSON(200, gin.H{
