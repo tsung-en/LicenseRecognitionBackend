@@ -52,6 +52,35 @@ func ParkingCheckIn(c *gin.Context) {
 	return
 }
 
+func ParkingCheckOut(c *gin.Context) {
+	var CarType CarType
+	err := c.ShouldBindJSON(&CarType)
+	if err != nil {
+		c.JSON(200, gin.H{
+			"code":    -1,
+			"message": fmt.Sprintf("%v", err),
+		})
+		return
+	}
+
+	var parking models.Parking
+	parking.Car = CarType.Car
+	parking.CheckOut = time.Now()
+
+	if err = parking.Update(); err != nil {
+		c.JSON(200, gin.H{
+			"code":    -1,
+			"message": fmt.Sprintf("%v", err),
+		})
+		return
+	}
+
+	c.JSON(200, gin.H{
+		"result": &parking,
+	})
+	return
+}
+
 func ParkingInfo(c *gin.Context) {
 	var parkingInfo models.Parking
 
