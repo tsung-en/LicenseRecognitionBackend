@@ -27,9 +27,9 @@ func ParkingCheckIn(c *gin.Context) {
 	var parking models.Parking
 	parking.Car = CarType.Car
 
-	_, err = parking.SelectByCarVal()
+	p, e := parking.SelectByCarVal()
 
-	if err == nil {
+	if e == nil && p.CheckOut == nil {
 		c.JSON(200, gin.H{
 			"code":    -1,
 			"message": fmt.Sprintf("%s dosen't checkout", parking.Car),
