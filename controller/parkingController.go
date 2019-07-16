@@ -111,8 +111,9 @@ func ParkingCheckOut(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{
-		"amount": parking.Income,
-		"car":    parking.Car,
+		"amount":   parking.Income,
+		"CheckIn":  p.CheckIn,
+		"CheckOut": parking.CheckOut,
 	})
 	return
 }
