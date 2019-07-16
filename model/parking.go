@@ -2,8 +2,6 @@ package models
 
 import (
 	"LicenseRecognitionBackend/db"
-	"errors"
-	"fmt"
 	"time"
 
 	"github.com/jinzhu/gorm"
@@ -23,18 +21,7 @@ func (parking *Parking) Insert() (err error) {
 	return
 }
 
-func (parking *Parking) Update() (err error) {
-	var update Parking
-	if err = db.Eloquent.Where("car = ?", parking.Car).Order("check_in").First(&update).Error; err != nil {
-		fmt.Printf("%v", err)
-		return
-	}
-
-	if checkOutValidation := update.CheckOut; checkOutValidation != nil {
-		err = errors.New(fmt.Sprintf("not found %s check in", update.Car))
-		return
-	}
-
+func (parking *Parking) Update(update *Parking) (err error) {
 	if err = db.Eloquent.Model(&update).Update(&parking).Error; err != nil {
 		return
 	}
@@ -43,7 +30,7 @@ func (parking *Parking) Update() (err error) {
 }
 
 func (parking *Parking) SelectByCarVal() (re Parking, err error) {
-	if err = db.Eloquent.Where("car = ?", parking.Car).Find(&re).Error; err != nil {
+	if err = db.Eloquent.Where("car = ?", parking.Car).Last(&re).Error; err != nil {
 		return
 	}
 	return
