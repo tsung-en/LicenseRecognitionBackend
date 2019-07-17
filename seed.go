@@ -10,7 +10,7 @@ import (
 func main() {
 	db.Eloquent.DropTableIfExists(&models.User{}, &models.UserCar{}, &models.Parking{})
 	db.Eloquent.AutoMigrate(&models.User{}, &models.UserCar{}, &models.Parking{})
-	
+
 	car1 := models.UserCar{
 		Car: "1111-AB",
 	}
@@ -52,7 +52,7 @@ func main() {
 	parking1 := models.Parking{
 		Car:      "1111-AB",
 		CheckIn:  checkin,
-		CheckOut: chekout,
+		CheckOut: &chekout,
 	}
 
 	checkin, err = time.Parse(
@@ -69,7 +69,7 @@ func main() {
 	parking2 := models.Parking{
 		Car:      "3333-ED",
 		CheckIn:  checkin,
-		CheckOut: chekout,
+		CheckOut: &chekout,
 	}
 
 	db.Eloquent.Create(&user1)
