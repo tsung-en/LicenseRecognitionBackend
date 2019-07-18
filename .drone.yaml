@@ -1,0 +1,6 @@
+pipeline:
+  golang:
+    image: golang:1.12
+    commands:
+      - go mod download
+      - go build .
